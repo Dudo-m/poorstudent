@@ -1,0 +1,24 @@
+body {
+    background-image: url("../img/background.jpg");
+}
+#left{
+    text-align: center;
+    margin-top: 320px;
+}
+#card{
+    width: 380px;
+    opacity: 80%;
+    margin: 120px auto;
+}
+#codeImg{
+    width: 100px;
+    height: 38px;
+}
+#imgDiv{
+    padding: 0 !important;
+    height: 38px;
+}
+#loginHeader{
+    text-align: center;
+    font-size: 18px;
+}
