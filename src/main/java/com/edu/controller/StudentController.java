@@ -121,7 +121,7 @@ public class StudentController {
             model.addAttribute("msg", "保存成功");
             //重新放student信息到session
             Student findStudent = studentService.FindStudentByUserId(user.getUserId());
-            session.setAttribute("student",findStudent);
+            session.setAttribute("student", findStudent);
         }
         return "forward:/studentInfo";
     }

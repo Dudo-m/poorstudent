@@ -44,7 +44,7 @@ public class TeacherController {
 
     //访问困难认定
     @RequestMapping("/hard")
-    public String hard(Model model,Integer currentPage, Integer totalPage) {
+    public String hard(Model model, Integer currentPage, Integer totalPage) {
         if (currentPage == null) {
             currentPage = 1;
         }
@@ -54,14 +54,14 @@ public class TeacherController {
         if (totalPage != null && currentPage > totalPage) {
             currentPage = totalPage;
         }
-        IPage<StudentAndHardVO> studentAndHardVOPage = teacherService.studentAndHardVOPage(currentPage,5);
-        model.addAttribute("hardVOPage",studentAndHardVOPage);
+        IPage<StudentAndHardVO> studentAndHardVOPage = teacherService.studentAndHardVOPage(currentPage, 5);
+        model.addAttribute("hardVOPage", studentAndHardVOPage);
         return "teacher/Thard";
     }
 
     //访问资源管理
     @RequestMapping("/resource")
-    public String resource(Model model,Integer currentPage, Integer totalPage){
+    public String resource(Model model, Integer currentPage, Integer totalPage) {
         if (currentPage == null) {
             currentPage = 1;
         }
@@ -71,14 +71,14 @@ public class TeacherController {
         if (totalPage != null && currentPage > totalPage) {
             currentPage = totalPage;
         }
-        IPage<Resources> resourcesPage = resourceService.findAllResourcePage(currentPage,5);
-        model.addAttribute("resourcesPage",resourcesPage);
+        IPage<Resources> resourcesPage = resourceService.findAllResourcePage(currentPage, 5);
+        model.addAttribute("resourcesPage", resourcesPage);
         return "teacher/Tresource";
     }
 
     //访问资助申请审核
     @RequestMapping("/support")
-    public String support(Model model,Integer currentPage, Integer totalPage){
+    public String support(Model model, Integer currentPage, Integer totalPage) {
         if (currentPage == null) {
             currentPage = 1;
         }
@@ -89,7 +89,7 @@ public class TeacherController {
             currentPage = totalPage;
         }
         IPage<ResourceStudentSupportVO> supportVOPage = teacherService.findSupportVOPage(currentPage, 5);
-        model.addAttribute("supportVOPage",supportVOPage);
+        model.addAttribute("supportVOPage", supportVOPage);
         return "teacher/TsupportApply";
     }
 
@@ -101,64 +101,65 @@ public class TeacherController {
 
     //资助申请通过，不通过或者撤销
     @GetMapping("/clickSupport")
-    public String clickSupport(Support support, Model model){
+    public String clickSupport(Support support, Model model) {
         int flag = teacherService.updateSupportById(support);
-        if (flag!=0){
-            model.addAttribute("msg","设置成功");
+        if (flag != 0) {
+            model.addAttribute("msg", "设置成功");
             return "forward:/teacher/support";
-        }else {
-            model.addAttribute("msg","设置失败");
+        } else {
+            model.addAttribute("msg", "设置失败");
             return "forward:/teacher/support";
         }
     }
 
     //困难申请通过，不通过或者撤销
     @GetMapping("/clickHard")
-    public String clickHard(Hard hard, Model model){
+    public String clickHard(Hard hard, Model model) {
         int flag = teacherService.updateHardById(hard);
-        if (flag!=0){
-            model.addAttribute("msg","设置成功");
+        if (flag != 0) {
+            model.addAttribute("msg", "设置成功");
             return "forward:/teacher/hard";
-        }else {
-            model.addAttribute("msg","设置失败");
+        } else {
+            model.addAttribute("msg", "设置失败");
             return "forward:/teacher/hard";
         }
     }
+
     //添加资源
     @PostMapping("/addResource")
-    public String addResource(Resources resources,Model model){
+    public String addResource(Resources resources, Model model) {
         int flag = resourceService.addResource(resources);
-        if (flag!=0){
-            model.addAttribute("msg","添加成功");
+        if (flag != 0) {
+            model.addAttribute("msg", "添加成功");
             return "forward:/teacher/resource";
-        }else {
-            model.addAttribute("msg","添加失败");
+        } else {
+            model.addAttribute("msg", "添加失败");
             return "forward:/teacher/resource";
         }
     }
 
     //修改资源
     @PostMapping("/updateResource")
-    public String updateResource(Resources resources,Model model){
+    public String updateResource(Resources resources, Model model) {
         int flag = resourceService.updateResource(resources);
-        if (flag!=0){
-            model.addAttribute("msg","修改成功");
+        if (flag != 0) {
+            model.addAttribute("msg", "修改成功");
             return "forward:/teacher/resource";
-        }else {
-            model.addAttribute("msg","修改失败");
+        } else {
+            model.addAttribute("msg", "修改失败");
             return "forward:/teacher/resource";
         }
     }
 
     //删除资源
     @GetMapping("/delResource")
-    public String delResource(String resourceId,Model model){
+    public String delResource(String resourceId, Model model) {
         int flag = resourceService.delResource(resourceId);
-        if (flag!=0){
-            model.addAttribute("msg","删除成功");
+        if (flag != 0) {
+            model.addAttribute("msg", "删除成功");
             return "forward:/teacher/resource";
-        }else {
-            model.addAttribute("msg","删除失败");
+        } else {
+            model.addAttribute("msg", "删除失败");
             return "forward:/teacher/resource";
         }
     }
@@ -166,21 +167,21 @@ public class TeacherController {
     //echars1柱形图
     @ResponseBody
     @GetMapping("/specialList")
-    public List<Integer> specialList(){
+    public List<Integer> specialList() {
         return teacherService.findSpecialList();
     }
 
     //echars2饼图
     @ResponseBody
     @GetMapping("/echarsDataList")
-    public List<EcharsDataVO> echarsDataList(){
+    public List<EcharsDataVO> echarsDataList() {
         return teacherService.findEcharsDataList();
     }
 
     //ajax根据id查资源
     @ResponseBody
     @GetMapping("/findResource")
-    public Resources findResource(String resourceId){
+    public Resources findResource(String resourceId) {
         return teacherService.findResourceById(resourceId);
     }
 
@@ -201,8 +202,8 @@ public class TeacherController {
     //layui学生信息动态表格
     @ResponseBody
     @GetMapping("/studentList")
-    public DataVO<Student> studentList(Integer page, Integer limit, @RequestParam(required = false,value = "key[studentName]")String studentName,
-                                       @RequestParam(required = false,value = "key[studentNumber]")String studentNumber) {
-        return teacherService.pageStudentBySearch(page,limit,studentName,studentNumber);
+    public DataVO<Student> studentList(Integer page, Integer limit, @RequestParam(required = false, value = "key[studentName]") String studentName,
+                                       @RequestParam(required = false, value = "key[studentNumber]") String studentNumber) {
+        return teacherService.pageStudentBySearch(page, limit, studentName, studentNumber);
     }
 }

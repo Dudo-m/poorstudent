@@ -33,10 +33,10 @@ public class UserController {
         String md5UserPassword = DigestUtils.md5DigestAsHex(passwordSalt.getBytes());
 
         String piccode = (String) session.getAttribute("piccode");
-        if (piccode==null){
+        if (piccode == null) {
             //如果页面没被刷新
             return "redirect:/";
-        }else if (!code.toUpperCase().equals(piccode.toUpperCase())) {
+        } else if (!code.toUpperCase().equals(piccode.toUpperCase())) {
             //转换成大写比较
             model.addAttribute("msg", "验证码错误");
             return "login";
@@ -113,6 +113,7 @@ public class UserController {
     public String register() {
         return "register";
     }
+
     //提交注册
     @PostMapping("/submitRegister")
     public String addRegister(User user, String rePassword, Model model) {
@@ -167,7 +168,7 @@ public class UserController {
         user.setUserEmail(userEmail);
         int flag = userService.updateUser(user);
         if (flag != 0) {
-            session.setAttribute("user",user);
+            session.setAttribute("user", user);
             model.addAttribute("msg", "修改成功");
         } else {
             model.addAttribute("msg", "修改失败");
@@ -182,7 +183,7 @@ public class UserController {
             default:
                 return null;
         }
-}
+    }
 
     //注册界面ajax用户名判重
     @ResponseBody
