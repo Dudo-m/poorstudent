@@ -11,10 +11,7 @@ import com.edu.entity.Hard;
 import com.edu.entity.Resources;
 import com.edu.entity.Student;
 import com.edu.entity.Support;
-import com.edu.vo.DataVO;
-import com.edu.vo.EcharsDataVO;
-import com.edu.vo.ResourceStudentSupportVO;
-import com.edu.vo.StudentAndHardVO;
+import com.edu.vo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -101,27 +98,13 @@ public class TeacherServiceImpl implements TeacherService{
     @Transactional(readOnly = true)
     public List<Integer> findSpecialList() {
         List<Integer> specialList = new ArrayList<>();
-        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
-        //孤残
-        queryWrapper.eq("special_oad",true);
-        specialList.add(studentDao.selectCount(queryWrapper));
-        queryWrapper.clear();
-        //单亲
-        queryWrapper.eq("special_sp",true);
-        specialList.add(studentDao.selectCount(queryWrapper));
-        queryWrapper.clear();
-        //烈士子女
-        queryWrapper.eq("special_com",true);
-        specialList.add(studentDao.selectCount(queryWrapper));
-        queryWrapper.clear();
-        //优抚对象
-        queryWrapper.eq("special_fo",true);
-        specialList.add(studentDao.selectCount(queryWrapper));
-        queryWrapper.clear();
-        //低保家庭
-        queryWrapper.eq("special_sa",true);
-        specialList.add(studentDao.selectCount(queryWrapper));
-        queryWrapper.clear();
+        EcharsDataVO2 echarsDataVO2 = studentDao.selectSpecialCount();
+        //孤残,单亲，烈士子女，优抚对象，低保家庭
+        specialList.add(echarsDataVO2.getOadCount());
+        specialList.add(echarsDataVO2.getSpCount());
+        specialList.add(echarsDataVO2.getComCount());
+        specialList.add(echarsDataVO2.getFoCount());
+        specialList.add(echarsDataVO2.getSaCount());
         return specialList;
     }
 
@@ -129,20 +112,6 @@ public class TeacherServiceImpl implements TeacherService{
     @Override
     @Transactional(readOnly = true)
     public List<EcharsDataVO> findEcharsDataList() {
-        List<EcharsDataVO> echarsDataVOList = new ArrayList<>();
-        QueryWrapper<Resources> queryWrapper = new QueryWrapper<>();
-        //院校类数量
-        queryWrapper.eq("resource_level","院校");
-        echarsDataVOList.add(new EcharsDataVO(resourceDao.selectCount(queryWrapper),"院校"));
-        queryWrapper.clear();
-        //社会类数量
-        queryWrapper.eq("resource_level","社会");
-        echarsDataVOList.add(new EcharsDataVO(resourceDao.selectCount(queryWrapper),"社会"));
-        queryWrapper.clear();
-        //国家类数量
-        queryWrapper.eq("resource_level","国家");
-        echarsDataVOList.add(new EcharsDataVO(resourceDao.selectCount(queryWrapper),"国家"));
-        queryWrapper.clear();
-        return echarsDataVOList;
+        return resourceDao.selectCountByResourceLevel();
     }
 }
