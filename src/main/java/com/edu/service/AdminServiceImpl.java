@@ -48,22 +48,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    @Transactional
     public int deleteUserById(String userId) {
-        //删除用户如果是学生同时删除 困难申请，资助申请和学生信息
-        QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id",userId);
-        Student student = studentDao.selectOne(queryWrapper);
-        if (student!=null){
-            QueryWrapper query = new QueryWrapper();
-            query.eq("student_id",student.getStudentId());
-            //删除资助申请
-            supportDao.delete(query);
-            //删除困难申请
-            hardDao.delete(query);
-            //删除学生信息
-            studentDao.deleteById(student.getStudentId());
-        }
+        //外键删除相关信息
         return  userDao.deleteById(userId);
     }
 
