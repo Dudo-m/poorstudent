@@ -68,6 +68,15 @@
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
                         <!--内容1-->
+                        <form class="layui-form" action="" th:action="@{/myApply}">
+                            <div class="layui-form-item" style="margin-left: 5px">
+                                资源名：
+                                <div class="layui-inline">
+                                    <input class="layui-input" name="resourceName" id="resourceNameSearch">
+                                </div>
+                                <button class="layui-btn" lay-submit>搜索</button>
+                            </div>
+                        </form>
                         <!--表格-->
                         <table class="layui-table">
                             <thead>
@@ -93,10 +102,10 @@
                             </tbody>
                         </table>
                         <div class="layui-btn-group " style="float: right">
-                            <a href="#" th:href="@{/myApply}" type="button" class="layui-btn layui-btn-primary" >首页</a>
-                            <a href="#" th:href="@{/myApply(currentPage=${resourceVOPage.current}-1,totalPage=${resourceVOPage.pages})}" type="button" class="layui-btn layui-btn-primary">上一页</a>
-                            <a href="#" th:href="@{/myApply(currentPage=${resourceVOPage.current}+1,totalPage=${resourceVOPage.pages})}" type="button" class="layui-btn layui-btn-primary">下一页</a>
-                            <a href="#" th:href="@{/myApply(currentPage=${resourceVOPage.pages})}" type="button" class="layui-btn layui-btn-primary">尾页</a>
+                            <a href="#" th:href="@{/myApply(resourceName=${resourceName})}" type="button" class="layui-btn layui-btn-primary" >首页</a>
+                            <a href="#" th:href="@{/myApply(currentPage=${resourceVOPage.current}-1,totalPage=${resourceVOPage.pages},resourceName=${resourceName})}" type="button" class="layui-btn layui-btn-primary">上一页</a>
+                            <a href="#" th:href="@{/myApply(currentPage=${resourceVOPage.current}+1,totalPage=${resourceVOPage.pages},resourceName=${resourceName})}" type="button" class="layui-btn layui-btn-primary">下一页</a>
+                            <a href="#" th:href="@{/myApply(currentPage=${resourceVOPage.pages},resourceName=${resourceName})}" type="button" class="layui-btn layui-btn-primary">尾页</a>
                         </div>
                     </div>
                    <!-- 已申请-->

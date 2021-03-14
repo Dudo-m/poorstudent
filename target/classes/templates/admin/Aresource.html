@@ -60,6 +60,15 @@
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
             <legend>资源列表</legend>
         </fieldset>
+        <form class="layui-form" action="" th:action="@{/admin/resource}">
+            <div class="layui-form-item" style="margin-left: 5px">
+                资源名：
+                <div class="layui-inline">
+                    <input class="layui-input" name="resourceName" id="resourceNameSearch">
+                </div>
+                <button class="layui-btn" lay-submit>搜索</button>
+            </div>
+        </form>
         <!--表格-->
         <table class="layui-table">
             <thead>
@@ -96,14 +105,14 @@
                 </button>
             </div>
             <div class="layui-col-md4 layui-btn-group " style="left: 100px">
-                <a href="#" th:href="@{/admin/resource}" type="button" class="layui-btn layui-btn-primary">首页</a>
+                <a href="#" th:href="@{/admin/resource(resourceName=${resourceName})}" type="button" class="layui-btn layui-btn-primary">首页</a>
                 <a href="#"
-                   th:href="@{/admin/resource(currentPage=${resourcesPage.current}-1,totalPage=${resourcesPage.pages})}"
+                   th:href="@{/admin/resource(currentPage=${resourcesPage.current}-1,totalPage=${resourcesPage.pages},F)}"
                    type="button" class="layui-btn layui-btn-primary">上一页</a>
                 <a href="#"
-                   th:href="@{/admin/resource(currentPage=${resourcesPage.current}+1,totalPage=${resourcesPage.pages})}"
+                   th:href="@{/admin/resource(currentPage=${resourcesPage.current}+1,totalPage=${resourcesPage.pages},resourceName=${resourceName})}"
                    type="button" class="layui-btn layui-btn-primary">下一页</a>
-                <a href="#" th:href="@{/admin/resource(currentPage=${resourcesPage.pages})}" type="button"
+                <a href="#" th:href="@{/admin/resource(currentPage=${resourcesPage.pages},resourceName=${resourceName})}" type="button"
                    class="layui-btn layui-btn-primary">尾页</a>
             </div>
         </div>

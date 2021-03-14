@@ -73,6 +73,15 @@
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
                 <legend>困难认定</legend>
             </fieldset>
+            <form class="layui-form" action="" th:action="@{/teacher/hard}">
+                <div class="layui-form-item" style="margin-left: 5px">
+                    姓名：
+                    <div class="layui-inline">
+                        <input class="layui-input" name="studentName" id="studentNameSearch">
+                    </div>
+                    <button class="layui-btn" lay-submit>搜索</button>
+                </div>
+            </form>
             <!--表格-->
             <table class="layui-table">
                 <thead>
@@ -99,10 +108,10 @@
                 </tbody>
             </table>
             <div class="layui-btn-group " style="float: right">
-                <a href="#" th:href="@{/teacher/hard}" type="button" class="layui-btn layui-btn-primary" >首页</a>
-                <a href="#" th:href="@{/teacher/hard(currentPage=${hardVOPage.current}-1,totalPage=${hardVOPage.pages})}" type="button" class="layui-btn layui-btn-primary">上一页</a>
-                <a href="#" th:href="@{/teacher/hard(currentPage=${hardVOPage.current}+1,totalPage=${hardVOPage.pages})}" type="button" class="layui-btn layui-btn-primary">下一页</a>
-                <a href="#" th:href="@{/teacher/hard(currentPage=${hardVOPage.pages})}" type="button" class="layui-btn layui-btn-primary">尾页</a>
+                <a href="#" th:href="@{/teacher/hard(studentName=${studentName})}" type="button" class="layui-btn layui-btn-primary" >首页</a>
+                <a href="#" th:href="@{/teacher/hard(currentPage=${hardVOPage.current}-1,totalPage=${hardVOPage.pages},studentName=${studentName})}" type="button" class="layui-btn layui-btn-primary">上一页</a>
+                <a href="#" th:href="@{/teacher/hard(currentPage=${hardVOPage.current}+1,totalPage=${hardVOPage.pages},studentName=${studentName})}" type="button" class="layui-btn layui-btn-primary">下一页</a>
+                <a href="#" th:href="@{/teacher/hard(currentPage=${hardVOPage.pages},studentName=${studentName})}" type="button" class="layui-btn layui-btn-primary">尾页</a>
             </div>
         </div>
     </div>
