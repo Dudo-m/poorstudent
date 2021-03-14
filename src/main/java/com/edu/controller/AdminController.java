@@ -47,7 +47,7 @@ public class AdminController {
 
     //访问资源管理
     @RequestMapping("/resource")
-    public String resource(Model model, Integer currentPage, Integer totalPage) {
+    public String resource(Model model, Integer currentPage, Integer totalPage, String resourceName) {
         if (currentPage == null) {
             currentPage = 1;
         }
@@ -57,8 +57,9 @@ public class AdminController {
         if (totalPage != null && currentPage > totalPage) {
             currentPage = totalPage;
         }
-        IPage<Resources> resourcesPage = resourceService.findAllResourcePage(currentPage, 5);
+        IPage<Resources> resourcesPage = resourceService.findAllResourcePage(currentPage, 5, resourceName);
         model.addAttribute("resourcesPage", resourcesPage);
+        model.addAttribute("resourceName",resourceName);
         return "admin/Aresource";
     }
 

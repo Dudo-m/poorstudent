@@ -28,7 +28,7 @@ public class StudentController {
 
     //访问我的申请
     @GetMapping("/myApply")
-    public String myApply(Model model, Integer currentPage, Integer totalPage, HttpSession session) {
+    public String myApply(Model model, Integer currentPage, Integer totalPage, HttpSession session, String resourceName) {
         Student student = (Student) session.getAttribute("student");
         if (student == null) {
             model.addAttribute("msg", "请先完善信息");
@@ -44,11 +44,12 @@ public class StudentController {
         if (totalPage != null && currentPage > totalPage) {
             currentPage = totalPage;
         }
-        IPage<ResourceAndSupportVO> resourceAndSupportVO = studentService.FindResourceVOByStudentIdPage(currentPage, 5, student.getStudentId());
+        IPage<ResourceAndSupportVO> resourceAndSupportVO = studentService.FindResourceVOByStudentIdPage(currentPage, 5, student.getStudentId(), resourceName);
         model.addAttribute("resourceVOPage", resourceAndSupportVO);
 
         Hard hard = studentService.FindHardByStudentId(student.getStudentId());
         model.addAttribute("hardApply", hard);
+        model.addAttribute("resourceName", resourceName);
         return "myApply";
     }
 
@@ -82,7 +83,7 @@ public class StudentController {
 
     //访问申请资助
     @GetMapping("/supportApply")
-    public String supportApply(Model model, Integer currentPage, Integer totalPage, HttpSession session) {
+    public String supportApply(Model model, Integer currentPage, Integer totalPage, HttpSession session, String resourceName) {
         Student student = (Student) session.getAttribute("student");
         if (student == null) {
             model.addAttribute("msg", "请先完善信息");
@@ -98,8 +99,9 @@ public class StudentController {
             currentPage = totalPage;
         }
 
-        IPage<ResourceApplyVO> resourceApplyVOPage = studentService.ResourceListByPage(currentPage, 5, student.getStudentId());
+        IPage<ResourceApplyVO> resourceApplyVOPage = studentService.ResourceListByPage(currentPage, 5, student.getStudentId(), resourceName);
         model.addAttribute("resourceApplyVOPage", resourceApplyVOPage);
+        model.addAttribute("resourceName", resourceName);
         return "supportApply";
     }
 

@@ -11,11 +11,11 @@ public interface StudentService {
 
     Student FindStudentByUserId(String userId);
 
-    IPage<ResourceApplyVO> ResourceListByPage(int currentPage, int PageSize,String studentId);
+    IPage<ResourceApplyVO> ResourceListByPage(int currentPage, int PageSize,String studentId, String resourceName);
 
     int SupportApplyAdd(String resourceId,String studentId);
 
-    IPage<ResourceAndSupportVO> FindResourceVOByStudentIdPage(Integer currentPage, int pageSize , String studentId);
+    IPage<ResourceAndSupportVO> FindResourceVOByStudentIdPage(Integer currentPage, int pageSize , String studentId ,String resourceName);
 
     int SupportApplyDel(String supportId);
 

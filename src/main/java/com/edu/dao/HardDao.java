@@ -13,6 +13,9 @@ public interface HardDao extends BaseMapper<Hard> {
     @Select("select t1.hard_id,t1.hard_reason,t1.hard_result,t2.* from hard t1 left join student t2 on t1.student_id= t2.student_id")
     IPage<StudentAndHardVO> pageHardVO(Page page);
 
+    @Select("select t1.hard_id,t1.hard_reason,t1.hard_result,t2.* from hard t1 left join student t2 on t1.student_id= t2.student_id where t2.student_name like CONCAT('%',#{studentName},'%')")
+    IPage<StudentAndHardVO> pageHardVOBySearch(Page page,String studentName);
+
     @Select("select t1.hard_id,t1.hard_reason,t1.hard_result,t2.* from hard t1 left join student t2 on t1.student_id= t2.student_id where hard_id = #{hardId}")
     StudentAndHardVO findStudentAndHardVOById(String hardId);
 }

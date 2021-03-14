@@ -47,10 +47,15 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public IPage<ResourceApplyVO> ResourceListByPage(int currentPage,int PageSize,String studentId) {
+    public IPage<ResourceApplyVO> ResourceListByPage(int currentPage,int PageSize,String studentId, String resourceName) {
         //查资源列表
         Page page = new Page<>(currentPage,PageSize);
-        IPage<ResourceApplyVO> resourceApplyVOIPage = resourceDao.pageResourceApplyVO(page);
+        IPage<ResourceApplyVO> resourceApplyVOIPage = null;
+        if (resourceName!=null&&!resourceName.isEmpty()){
+           resourceApplyVOIPage = resourceDao.pageResourceApplyVOBySearch(page,resourceName);
+        }else {
+           resourceApplyVOIPage = resourceDao.pageResourceApplyVO(page);
+        }
         //查已申请资源id
         QueryWrapper<Support> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("student_id",studentId);
@@ -77,9 +82,15 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public IPage<ResourceAndSupportVO> FindResourceVOByStudentIdPage(Integer currentPage, int PageSize, String studentId) {
+    public IPage<ResourceAndSupportVO> FindResourceVOByStudentIdPage(Integer currentPage, int PageSize, String studentId, String resourceName) {
         Page resourcePage = new Page<>(currentPage,PageSize);
-        IPage<ResourceAndSupportVO> resourcesIPage = supportDao.pageResourceVO(resourcePage, studentId);
+        IPage<ResourceAndSupportVO> resourcesIPage;
+        if (resourceName!=null&&!resourceName.isEmpty()){
+            resourcesIPage = supportDao.pageResourceVOBySearch(resourcePage, studentId ,resourceName);
+        }else {
+            resourcesIPage = supportDao.pageResourceVO(resourcePage, studentId);
+        }
+
         return resourcesIPage;
     }
 

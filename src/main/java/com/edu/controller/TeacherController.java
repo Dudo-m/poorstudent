@@ -44,7 +44,7 @@ public class TeacherController {
 
     //访问困难认定
     @RequestMapping("/hard")
-    public String hard(Model model, Integer currentPage, Integer totalPage) {
+    public String hard(Model model, Integer currentPage, Integer totalPage,String studentName) {
         if (currentPage == null) {
             currentPage = 1;
         }
@@ -54,14 +54,15 @@ public class TeacherController {
         if (totalPage != null && currentPage > totalPage) {
             currentPage = totalPage;
         }
-        IPage<StudentAndHardVO> studentAndHardVOPage = teacherService.studentAndHardVOPage(currentPage, 5);
+        IPage<StudentAndHardVO> studentAndHardVOPage = teacherService.studentAndHardVOPage(currentPage, 5, studentName);
         model.addAttribute("hardVOPage", studentAndHardVOPage);
+        model.addAttribute("studentName", studentName);
         return "teacher/Thard";
     }
 
     //访问资源管理
     @RequestMapping("/resource")
-    public String resource(Model model, Integer currentPage, Integer totalPage) {
+    public String resource(Model model, Integer currentPage, Integer totalPage,String resourceName) {
         if (currentPage == null) {
             currentPage = 1;
         }
@@ -71,14 +72,15 @@ public class TeacherController {
         if (totalPage != null && currentPage > totalPage) {
             currentPage = totalPage;
         }
-        IPage<Resources> resourcesPage = resourceService.findAllResourcePage(currentPage, 5);
+        IPage<Resources> resourcesPage = resourceService.findAllResourcePage(currentPage, 5, resourceName);
         model.addAttribute("resourcesPage", resourcesPage);
+        model.addAttribute("resourceName", resourceName);
         return "teacher/Tresource";
     }
 
     //访问资助申请审核
     @RequestMapping("/support")
-    public String support(Model model, Integer currentPage, Integer totalPage) {
+    public String support(Model model, Integer currentPage, Integer totalPage,String resourceName) {
         if (currentPage == null) {
             currentPage = 1;
         }
@@ -88,8 +90,9 @@ public class TeacherController {
         if (totalPage != null && currentPage > totalPage) {
             currentPage = totalPage;
         }
-        IPage<ResourceStudentSupportVO> supportVOPage = teacherService.findSupportVOPage(currentPage, 5);
+        IPage<ResourceStudentSupportVO> supportVOPage = teacherService.findSupportVOPage(currentPage, 5, resourceName);
         model.addAttribute("supportVOPage", supportVOPage);
+        model.addAttribute("resourceName",resourceName);
         return "teacher/TsupportApply";
     }
 

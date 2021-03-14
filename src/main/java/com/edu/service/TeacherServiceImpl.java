@@ -56,8 +56,11 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
-    public IPage<StudentAndHardVO> studentAndHardVOPage(Integer currentPage, int PageSize) {
+    public IPage<StudentAndHardVO> studentAndHardVOPage(Integer currentPage, int PageSize , String studentName) {
         Page page = new Page<>(currentPage,PageSize);
+        if (studentName!=null&&!studentName.isEmpty()){
+            return hardDao.pageHardVOBySearch(page,studentName);
+        }
         return hardDao.pageHardVO(page);
     }
 
@@ -78,8 +81,11 @@ public class TeacherServiceImpl implements TeacherService{
 
     //学生申请资源列表
     @Override
-    public IPage<ResourceStudentSupportVO> findSupportVOPage(Integer currentPage, int PageSize){
+    public IPage<ResourceStudentSupportVO> findSupportVOPage(Integer currentPage, int PageSize, String resourceName){
         Page page = new Page<>(currentPage,PageSize);
+        if (resourceName!=null&&!resourceName.isEmpty()){
+            return supportDao.pageSupportVOBySearch(page,resourceName);
+        }
         return supportDao.pageSupportVO(page);
     }
 

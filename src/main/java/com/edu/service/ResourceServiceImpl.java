@@ -1,5 +1,6 @@
 package com.edu.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.edu.dao.ResourceDao;
@@ -18,9 +19,13 @@ public class ResourceServiceImpl implements ResourceService{
     ResourceDao resourceDao;
 
     @Override
-    public IPage<Resources> findAllResourcePage(Integer currentPage, int PageSize) {
+    public IPage<Resources> findAllResourcePage(Integer currentPage, int PageSize,String resourceName) {
         IPage<Resources> page = new Page<>(currentPage,PageSize);
-        return resourceDao.selectPage(page,null);
+        QueryWrapper<Resources> queryWrapper = new QueryWrapper<>();
+        if (resourceName!=null&&!resourceName.isEmpty()){
+            queryWrapper.like("resource_name",resourceName);
+        }
+        return resourceDao.selectPage(page,queryWrapper);
     }
 
     @Override

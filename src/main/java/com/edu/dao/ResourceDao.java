@@ -16,6 +16,9 @@ public interface ResourceDao extends BaseMapper<Resources> {
     @Select("select * from resource")
     IPage<ResourceApplyVO> pageResourceApplyVO(Page page);
 
+    @Select("select * from resource where resource_name like CONCAT('%',#{resourceName},'%')")
+    IPage<ResourceApplyVO> pageResourceApplyVOBySearch(Page page,String resourceName);
+
     @Select("select count(*) as value,resource_level as name from resource group by resource_level")
     List<EcharsDataVO> selectCountByResourceLevel();
 }

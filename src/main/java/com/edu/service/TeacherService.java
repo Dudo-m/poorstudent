@@ -16,7 +16,7 @@ import java.util.List;
 public interface TeacherService {
     DataVO<Student> pageStudentBySearch(Integer currentPage,Integer pageSize,String studentName,String studentNumber);
 
-    IPage<StudentAndHardVO> studentAndHardVOPage(Integer currentPage, int PageSize);
+    IPage<StudentAndHardVO> studentAndHardVOPage(Integer currentPage, int PageSize , String studentName);
 
     int updateHardById(Hard hard);
 
@@ -28,7 +28,7 @@ public interface TeacherService {
 
     List<EcharsDataVO> findEcharsDataList();
 
-    IPage<ResourceStudentSupportVO> findSupportVOPage(Integer currentPage, int PageSize);
+    IPage<ResourceStudentSupportVO> findSupportVOPage(Integer currentPage, int PageSize ,String resourceName);
 
     int updateSupportById(Support support);
 
