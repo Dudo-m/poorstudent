@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin//跨域(ajax测试用)
+//@CrossOrigin//跨域(ajax测试用)
 @Controller
 @RequestMapping("/admin")
 public class AdminController {

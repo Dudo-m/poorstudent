@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin//跨域(ajax测试用)
+//@CrossOrigin//跨域(ajax测试用)
 @Controller
 @RequestMapping("/teacher")
 public class TeacherController {
@@ -62,7 +62,11 @@ public class TeacherController {
 
     //访问资源管理
     @RequestMapping("/resource")
-    public String resource(Model model, Integer currentPage, Integer totalPage,String resourceName) {
+    public String resource(Model model, Integer currentPage, Integer totalPage,Resources resources) {
+        //id存在或者为""代表是保存和插入时带的参数
+        if (resources.getResourceId() !=null){
+            resources= new Resources();
+        }
         if (currentPage == null) {
             currentPage = 1;
         }
@@ -72,9 +76,9 @@ public class TeacherController {
         if (totalPage != null && currentPage > totalPage) {
             currentPage = totalPage;
         }
-        IPage<Resources> resourcesPage = resourceService.findAllResourcePage(currentPage, 5, resourceName);
+        IPage<Resources> resourcesPage = resourceService.findAllResourcePage(currentPage, 5, resources.getResourceName());
         model.addAttribute("resourcesPage", resourcesPage);
-        model.addAttribute("resourceName", resourceName);
+        model.addAttribute("resourceName", resources.getResourceName());
         return "teacher/Tresource";
     }
 

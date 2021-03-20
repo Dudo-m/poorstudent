@@ -64,9 +64,9 @@
         <!--表单-->
         <form th:if="${hard?.hardResult=='待认定'||hard==null}" class="layui-form" action="/addHardApply" method="post">
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">文本域</label>
+                <label class="layui-form-label">申请理由</label>
                 <div class="layui-input-block">
-                    <textarea name="hardText" placeholder="请输入内容" lay-verify="required" class="layui-textarea">[[${hard?.hardReason}]]</textarea>
+                    <textarea name="hardText" placeholder="请输入申请理由" lay-verify="required" class="layui-textarea">[[${hard?.hardReason}]]</textarea>
                 </div>
             </div>
             <div class="layui-form-item">
