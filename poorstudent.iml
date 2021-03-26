@@ -60,6 +60,25 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-redis:2.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:2.4.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-keyvalue:2.4.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.4.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-oxm:5.3.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.3.3" level="project" />
+    <orderEntry type="library" name="Maven: io.lettuce:lettuce-core:6.0.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.58.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.session:spring-session-data-redis:2.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.session:spring-session-core:2.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: mysql:mysql-connector-java:8.0.22" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.16" level="project" />
     <orderEntry type="library" name="Maven: com.baomidou:mybatis-plus-boot-starter:3.3.2" level="project" />
@@ -74,7 +93,6 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:2.4.2" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.4.5" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.3.3" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.3" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.1.22" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:2.4.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:2.4.2" level="project" />
@@ -103,7 +121,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.skyscreamer:jsonassert:1.5.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:5.3.3" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.3.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.7.0" level="project" />
   </component>

@@ -5,13 +5,16 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("student")
-public class Student {
+public class Student extends BaseEntity{
     @TableId(type = IdType.AUTO)
     private String studentId; //学生信息id
     private String studentName;  //姓名

@@ -5,15 +5,18 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("resource")
-public class Resources {
+public class Resources extends BaseEntity{
     @TableId(type = IdType.AUTO)
     private String resourceId; //资源id
     private String resourceName; //资源名
