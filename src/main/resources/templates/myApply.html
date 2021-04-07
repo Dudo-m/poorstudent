@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_userFragment :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>我的申请</title>
+    <link rel="stylesheet" href="../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <script src="../static/layui/layui.js"></script>
+</head>
+<body>
+    <!--头部导航部分-->
+    <div class="header" th:replace="_userFragment :: topmenu">
+        <div class="layui-col-md10">
+            <span id="header-font">贫困生资助系统</span>
+        </div>
+        <ul class="layui-nav layui-col-md2">
+            <li class="layui-nav-item" style="float: right">
+                <a href=""><img src="//t.cn/RCzsdCq" class="layui-nav-img">我</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">修改信息</a></dd>
+                    <dd><a href="javascript:;">安全管理</a></dd>
+                    <dd><a href="javascript:;">退了</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <!--主要内容部分-->
+    <div class="layui-row">
+        <!--左侧导航-->
+        <ul  th:replace="_userFragment :: leftmenu(1)" class="layui-nav layui-nav-tree  layui-col-md2" lay-filter="demo" style="height: 662px">
+            <li class="layui-nav-item layui-nav-itemed">
+                <a href="javascript:;"><i class="layui-icon">&#xe770;</i> 个人中心</a>
+                <dl class="layui-nav-child">
+                    <dd class="layui-this"><a href="javascript:;">我的申请</a></dd>
+                    <dd><a href="javascript:;">用户信息</a></dd>
+                    <dd><a href="studentInfo.html">学生信息</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="layui-icon">&#xe6b2;</i> 经济困难认定</a>
+                <dl class="layui-nav-child">
+                    <dd ><a href="javascript:;">经济困难认定申请</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item" >
+                <a href="javascript:;"><i class="layui-icon">&#xe857;</i> 资助管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">申请资助</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="layui-icon">&#xe631;</i> 系统管理</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">修改密码</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <!--右侧内容-->
+        <div class="layui-col-md10">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>我的申请</legend>
+            </fieldset>
+            <div class="layui-tab" style="margin-left: 10px">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">资助申请</li>
+                    <li>困难认定申请</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <!--内容1-->
+                        <form class="layui-form" action="" th:action="@{/myApply}">
+                            <div class="layui-form-item" style="margin-left: 5px">
+                                资源名：
+                                <div class="layui-inline">
+                                    <input class="layui-input" name="resourceName" id="resourceNameSearch">
+                                </div>
+                                <button class="layui-btn" lay-submit>搜索</button>
+                            </div>
+                        </form>
+                        <!--表格-->
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th>资源名</th>
+                                <th style="width: 450px">资源描述</th>
+                                <th>资源级别</th>
+                                <th>认定结果</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="resources,Iterable:${resourceVOPage.records}">
+                                <td th:text="${resources.resourceName}">国家助学金</td>
+                                <td> <div class="tdDiv" th:text="${resources.resourceInfo}">人生就像是一场修行</div></td>
+                                <td th:text="${resources.resourceLevel}">国家</td>
+                                <td th:text="${resources.supportResult}">待认定</td>
+                                <td>
+                                    <button th:if="${resources.supportResult=='待认定'}" onclick="revoke(1)" th:onclick="revoke([[${resources.supportId}]])" type="button" class="layui-btn layui-btn-sm layui-btn-danger">撤销</button>
+                                    <span th:if="${resources.supportResult!='待认定'}">无法撤销</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="layui-btn-group " style="float: right">
+                            <a href="#" th:href="@{/myApply(resourceName=${resourceName})}" type="button" class="layui-btn layui-btn-primary" >首页</a>
+                            <a href="#" th:href="@{/myApply(currentPage=${resourceVOPage.current}-1,totalPage=${resourceVOPage.pages},resourceName=${resourceName})}" type="button" class="layui-btn layui-btn-primary">上一页</a>
+                            <a href="#" th:href="@{/myApply(currentPage=${resourceVOPage.current}+1,totalPage=${resourceVOPage.pages},resourceName=${resourceName})}" type="button" class="layui-btn layui-btn-primary">下一页</a>
+                            <a href="#" th:href="@{/myApply(currentPage=${resourceVOPage.pages},resourceName=${resourceName})}" type="button" class="layui-btn layui-btn-primary">尾页</a>
+                        </div>
+                    </div>
+                   <!-- 已申请-->
+                    <div th:if="${hardApply!=null}" class="layui-tab-item">
+                        <div class="layui-card-header"><i class="layui-icon" style="color: #5FB878">&#x1005;</i> 已申请</div>
+                        <div class="layui-card-header">
+                            认定结果：[[${hardApply.hardResult}]]
+                        </div>
+                        <div class="layui-card-body">
+                            申请理由：<br>
+                            [[${hardApply.hardReason}]]
+                        </div>
+                        <div th:if="${hardApply.hardResult=='待认定'}" class="layui-card-body">
+                            <button th:onclick="hardRevoke([[${hardApply.hardId}]])" onclick="hardRevoke(1)" type="button" class="layui-btn layui-btn-sm layui-btn-danger">撤销申请</button>
+                        </div>
+                    </div>
+                    <!--未申请-->
+                    <div th:if="${hardApply==null}" class="layui-tab-item">
+                        <div class="layui-card-header"><i class="layui-icon" style="color: #01AAED">&#xe608;</i> 待申请</div>
+                        <div class="layui-card-body">
+                            <a href="#" th:href="@{/hardApply}" type="button" class="layui-btn layui-btn-sm layui-btn-normal">点击申请</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--撤销弹出层-->
+    <div class="layui-card" id="delOutCard" style="display: none;text-align: center;">
+        <div class="layui-card-header">消息</div>
+        <div class="layui-card-body">
+            是否撤销？
+        </div>
+        <div class="layui-card-body">
+            <a id="revoke" href="#" type="button" class="layui-btn layui-btn-sm layui-btn-normal">确认</a>
+            <a id="cancel" href="#" type="button" class="layui-btn layui-btn-sm layui-btn-primary">取消</a>
+        </div>
+    </div>
+
+</body>
+<script>
+    layui.use('element', function(){
+    });
+    layui.use('form', function(){
+    });
+    layui.use('layer', function(){
+        var $ = layui.jquery, layer = layui.layer;
+        //弹出消息
+        var msg = "[[${msg}]]";
+        if (msg!=null&&msg!=""){
+            layer.msg(msg);
+        }
+        //点击撤销资助申请
+        window.revoke = function (supportId){
+            $("#revoke").attr("href","/deleteMyApply/"+supportId);
+            layer.open({
+                title: false,
+                type:1,
+                content: $("#delOutCard")
+            });
+        }
+        //点击撤销困难申请
+        window.hardRevoke = function (hardId){
+            $("#revoke").attr("href","/deleteMyHardApply/"+hardId);
+            layer.open({
+                title: false,
+                type:1,
+                content: $("#delOutCard")
+            });
+        }
+        //点击取消关闭弹出层
+        $("#cancel").click(function () {
+            layer.closeAll('page');
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,23 @@
+.header{
+    height: 60px;
+    border-bottom: none;
+    background-color: #393D49;
+}
+
+#header-font{
+    font-size: 20px;
+    color: rgba(255,255,255,.7);
+    margin-left: 20px;
+    line-height: 60px;
+}
+.tdDiv{
+    width:450px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.tdDiv:hover{
+    white-space:normal;
+    overflow:auto;
+    text-overflow:clip;
+}
